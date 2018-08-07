@@ -18,7 +18,7 @@ import modelo.Usuario;
  *
  * @author a120138
  */
-@ManagedBean (name="usuario")
+@ManagedBean (name="novoUsuario")
 @ViewScoped
 public class NovoUsuario implements Serializable {
     private  Usuario usuario;
@@ -30,10 +30,38 @@ public class NovoUsuario implements Serializable {
     }
     
     public void inserirUsuario(){
-        dao.inserir(usuario);
+        getDao().inserir(getUsuario());
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage (FacesMessage.SEVERITY_INFO,"Usuário cadastrado", null));
-        usuario = new Usuario();
+        setUsuario(new Usuario());
     }   
+
+    /**
+     * @return the usuario
+     */
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    /**
+     * @return the dao
+     */
+    public Dao<Usuario> getDao() {
+        return dao;
+    }
+
+    /**
+     * @param dao the dao to set
+     */
+    public void setDao(Dao<Usuario> dao) {
+        this.dao = dao;
+    }
     
 }
