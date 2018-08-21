@@ -37,7 +37,7 @@ public class Login implements Serializable{
         ExternalContext ectx = context.getExternalContext();
         HttpSession session = (HttpSession) ectx.getSession(true);
         session.setAttribute("usuarioLogado", temp);        
-        return "TelaPerguntas/perguntas";    // menu.xhtml
+        return "/TelaPerguntas/perguntas";    // menu.xhtml
     }
     
       public Usuario getUsuario() {
