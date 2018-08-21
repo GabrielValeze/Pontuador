@@ -12,29 +12,33 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import modelo.Usuario;
+import util.JpaUtil;
 
 /**
  *
  * @author a120138
  */
-@ManagedBean (name="novoUsuario")
+@ManagedBean(name = "novoUsuario")
 @ViewScoped
 public class NovoUsuario implements Serializable {
-    private  Usuario usuario;
+
+    private Usuario usuario;
     private Dao<Usuario> dao;
-    
-    public NovoUsuario( ){
+
+    public NovoUsuario() {
         usuario = new Usuario();
         dao = new Dao(Usuario.class);
     }
-    
-    public void inserirUsuario(){
+
+    public void inserirUsuario() {
         getDao().inserir(getUsuario());
         FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage (FacesMessage.SEVERITY_INFO,"Usuário cadastrado", null));
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuário cadastrado", null));
         setUsuario(new Usuario());
-    }   
+    }
 
     /**
      * @return the usuario
@@ -63,5 +67,5 @@ public class NovoUsuario implements Serializable {
     public void setDao(Dao<Usuario> dao) {
         this.dao = dao;
     }
-    
+   
 }

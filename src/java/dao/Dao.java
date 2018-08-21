@@ -7,6 +7,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
+import modelo.Usuario;
 import util.JpaUtil;
 
 /**
@@ -65,4 +66,6 @@ public class Dao <T> implements Serializable {
         manager.close();      
         return lista;
     }
+    
+
 }

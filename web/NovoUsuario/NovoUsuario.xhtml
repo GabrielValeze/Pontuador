@@ -9,8 +9,12 @@
         <h:form id="formPrincipal" >
             <p:outputLabel id="campoNome" value="Nome: " />
             <p:inputText value="#{novoUsuario.usuario.nome}" required="true" requiredMessage="Nome obrigatório" maxlength="50"/>
+            <p/>
+            <p:outputLabel id="campoLogin" value="Login: " />
+            <p:inputText value="#{novoUsuario.usuario.login}" required="true" requiredMessage="Login obrigatório" maxlength="50"/>
+            <p/>
             <p:outputLabel id="campoSenha" value="Senha: "/>
-            <p:password value="#{novoUsuario.usuario.senha}" />
+            <p:password value="#{novoUsuario.usuario.senha}" required="true" requiredMessage="Login obrigatório" maxlength="50"/>
             <p/>
             <p:commandButton value="Salvar" action="#{novoUsuario.inserirUsuario()}" 
                              update="@form" />
