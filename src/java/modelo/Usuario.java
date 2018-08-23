@@ -28,12 +28,14 @@ public class Usuario implements Serializable {
     private String nome;
     @Column(length = 10)
     private String senha;
+    private int pontuacao;
     
     public Usuario(){
         id=0;
         login="";
         nome="";
         senha="";
+        pontuacao=0;
     }
         public Usuario(String login, String nome, String senha){
         this.login=login;
@@ -137,6 +139,20 @@ public class Usuario implements Serializable {
      */
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    /**
+     * @return the pontuacao
+     */
+    public int getPontuacao() {
+        return pontuacao;
+    }
+
+    /**
+     * @param pontuacao the pontuacao to set
+     */
+    public void setPontuacao(int pontuacao) {
+        this.pontuacao = pontuacao;
     }
     
 }
