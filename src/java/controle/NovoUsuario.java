@@ -1,36 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controle;
 
 import dao.NovoUsuarioDao;
-import dao.Dao;
 import java.io.Serializable;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import modelo.Usuario;
-import util.JpaUtil;
 
-/**
- *
- * @author a120138
- */
+// @author Gabriel Valeze
+ 
 @ManagedBean(name = "novoUsuario")
 @ViewScoped
 public class NovoUsuario implements Serializable {
 
     private Usuario usuario;
-    private Dao<Usuario> dao;
+    private List<Usuario> lista;
+    private NovoUsuarioDao dao;
 
     public NovoUsuario() {
         usuario = new Usuario();
-        dao = new Dao(Usuario.class);
+        dao = new NovoUsuarioDao();
+        lista = dao.listarTodos();
     }
 
     public void inserirUsuario() {
@@ -40,32 +32,28 @@ public class NovoUsuario implements Serializable {
         setUsuario(new Usuario());
     }
 
-    /**
-     * @return the usuario
-     */
     public Usuario getUsuario() {
         return usuario;
     }
-
-    /**
-     * @param usuario the usuario to set
-     */
+    
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
-    /**
-     * @return the dao
-     */
-    public Dao<Usuario> getDao() {
+    public List<Usuario> getLista() {
+        return lista;
+    }
+
+    public void setLista(List<Usuario> lista) {
+        this.lista = lista;
+    }
+
+    public NovoUsuarioDao getDao() {
         return dao;
     }
 
-    /**
-     * @param dao the dao to set
-     */
-    public void setDao(Dao<Usuario> dao) {
+    public void setDao(NovoUsuarioDao dao) {
         this.dao = dao;
     }
-   
+    
 }

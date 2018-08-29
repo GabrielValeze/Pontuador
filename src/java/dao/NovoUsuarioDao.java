@@ -1,12 +1,17 @@
 package dao;
+
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaQuery;
 import modelo.Usuario;
 import util.JpaUtil;
 
 public class NovoUsuarioDao implements Serializable { 
+    
+    EntityManager manager;
     
     public boolean inserir(Usuario user) {
         EntityManager manager = JpaUtil.getEntityManager();
@@ -35,5 +40,14 @@ public class NovoUsuarioDao implements Serializable {
             manager.close();
         }        
         return temp;
-}
+    }
+     
+    public List<Usuario> listarTodos() {        
+        manager = JpaUtil.getEntityManager();
+        CriteriaQuery<Usuario> query = manager.getCriteriaBuilder().createQuery(Usuario.class);
+        query.select(query.from(Usuario.class));
+        List<Usuario> lista = manager.createQuery(query).getResultList();
+        manager.close();      
+        return lista;
+    } 
 }

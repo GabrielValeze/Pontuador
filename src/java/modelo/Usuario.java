@@ -26,9 +26,10 @@ public class Usuario implements Serializable {
     private String login;
     @Column(length = 50)
     private String nome;
-    @Column(length = 10)
+    @Column(length = 100)
     private String senha;
-    private int pontuacao;
+    @Column(length = 150)
+    private Integer pontuacao;
     
     public Usuario(){
         id=0;
@@ -37,10 +38,11 @@ public class Usuario implements Serializable {
         senha="";
         pontuacao=0;
     }
-        public Usuario(String login, String nome, String senha){
+    public Usuario(String login, String nome, String senha, Integer pontuacao){
         this.login=login;
         this.nome=nome;
         this.senha=senha;
+        this.pontuacao=pontuacao;
     }
 
     @Override
@@ -50,6 +52,7 @@ public class Usuario implements Serializable {
         hash = 29 * hash + Objects.hashCode(this.getLogin());
         hash = 29 * hash + Objects.hashCode(this.getNome());
         hash = 29 * hash + Objects.hashCode(this.getSenha());
+        hash = 29 * hash + Objects.hashCode(this.getPontuacao());
         return hash;
     }
 
