@@ -9,7 +9,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import modelo.Usuario;
 import util.JpaUtil;
 
-public class NovoUsuarioDao implements Serializable { 
+public class UsuarioDao implements Serializable { 
     
     EntityManager manager;
     
@@ -23,7 +23,34 @@ public class NovoUsuarioDao implements Serializable {
         return true;
     } 
     
-     public Usuario autenticar(Usuario usuario){
+    public Usuario alterar(Usuario objeto) {
+        manager = JpaUtil.getEntityManager();
+        manager.getTransaction().begin();
+        objeto = manager.merge(objeto);
+        manager.getTransaction().commit();
+        manager.close();
+        return objeto;
+    }
+
+    public Usuario buscarPorCodigo(Object id) {
+        Usuario objeto;
+        manager = JpaUtil.getEntityManager();
+        objeto = manager.find(Usuario.class, id);
+        manager.close();
+        return objeto;
+    }
+
+    public void excluir(Integer id) {
+        manager = JpaUtil.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+        Usuario temp = manager.find(Usuario.class, id);
+        manager.remove(temp);
+        tx.commit();
+        manager.close();
+    }
+    
+    public Usuario autenticar(Usuario usuario){
         Usuario temp = null; // administrador retornado na consulta ao banco
         EntityManager manager = JpaUtil.getEntityManager();
         TypedQuery<Usuario> query = manager.createQuery("SELECT a FROM Usuario a WHERE a.login = :login AND a.senha = :senha",
@@ -34,7 +61,6 @@ public class NovoUsuarioDao implements Serializable {
             temp = query.getSingleResult(); 
         }
         catch(Exception e){ 
-            
         }     //aqui poderia haver um tratamento de exceção mais decente
         finally{
             manager.close();
@@ -49,5 +75,5 @@ public class NovoUsuarioDao implements Serializable {
         List<Usuario> lista = manager.createQuery(query).getResultList();
         manager.close();      
         return lista;
-    } 
+    }
 }

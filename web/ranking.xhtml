@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Ranking</title>
+    </h:head>
+    <h:body>
+        <h1> Pontuador </h1>
+        <h:form id="frmTable">
+            <p:dataTable id="tbUsuario" var="user" value="#{NovoUsuario.lista}">
+                <p:column headerText="Código" style="width: 10%;" sortBy="#{user.id}">
+                    <h:outputText value="#{user.id}" />
+                </p:column>
+                <p:column headerText="Nome" style="width: 25%;" sortBy="#{user.nome}">	
+                    <h:outputText value="#{user.nome}" />
+                </p:column>
+                <p:column headerText="Login" style="width: 25%;" sortBy="#{user.login}">
+                    <h:outputText value="#{user.login}" />
+                </p:column>
+                <p:column headerText="Pontuação" style="width: 25%;" sortBy="#{user.pontuacao}">
+                    <h:outputText value="#{user.pontuacao}" />
+                </p:column>            
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>

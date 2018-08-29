@@ -1,6 +1,6 @@
 package controle;
 
-import dao.NovoUsuarioDao;
+import dao.UsuarioDao;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -13,15 +13,16 @@ import modelo.Usuario;
  
 @ManagedBean(name = "novoUsuario")
 @ViewScoped
-public class NovoUsuario implements Serializable {
+public class UsuarioMB implements Serializable {
 
     private Usuario usuario;
+    private Usuario aux;            
     private List<Usuario> lista;
-    private NovoUsuarioDao dao;
+    private UsuarioDao dao;
 
-    public NovoUsuario() {
+    public UsuarioMB() {
         usuario = new Usuario();
-        dao = new NovoUsuarioDao();
+        dao = new UsuarioDao();
         lista = dao.listarTodos();
     }
 
@@ -29,9 +30,18 @@ public class NovoUsuario implements Serializable {
         getDao().inserir(getUsuario());
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuário cadastrado", null));
-        setUsuario(new Usuario());
+        lista.add(usuario);
+        limpar();
     }
 
+    public void limpar() {
+        usuario = new Usuario();
+    } 
+    
+    public void listar() {
+        lista = dao.listarTodos();
+    }
+    
     public Usuario getUsuario() {
         return usuario;
     }
@@ -48,11 +58,11 @@ public class NovoUsuario implements Serializable {
         this.lista = lista;
     }
 
-    public NovoUsuarioDao getDao() {
+    public UsuarioDao getDao() {
         return dao;
     }
 
-    public void setDao(NovoUsuarioDao dao) {
+    public void setDao(UsuarioDao dao) {
         this.dao = dao;
     }
     

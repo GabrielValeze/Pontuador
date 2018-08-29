@@ -1,20 +1,50 @@
-<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Pontuador - Pergunta 1</title>
     </h:head>
     <h:body>
         <h1> Pontuador </h1>
-        <p:dataTable id="tbProp" var="prop" value="#{ProprietarioMB.lista}">
-            <p:column headerText="Usuário" sortBy="#{prop.codigo}">
-            <h:outputText value="#{prop.codigo}" />
         
-            <h3> Usuário: </h3>
-            <h3> Pontos:  </h3>
-        </p:column>
+        <h:form id="frmTable">
+	<p:dataTable id="tbUsuario" var="user" value="#{NovoUsuario.lista}">
+            
+            <p:column headerText="Código" style="width: 10%;" sortBy="#{user.id}">
+                <h:outputText value="#{user.id}" />
+            </p:column>
+            <p:column headerText="Nome" style="width: 25%;" sortBy="#{user.nome}">	
+                <h:outputText value="#{user.nome}" />
+            </p:column>
+            <p:column headerText="Senha" style="width: 25%;" sortBy="#{user.senha}">
+                <h:outputText value="#{user.senha}" />
+            </p:column>
+            <p:column headerText="Login" style="width: 25%;" sortBy="#{user.login}">
+                <h:outputText value="#{user.login}" />
+            </p:column>
+            <p:column headerText="Pontuação" style="width: 25%;" sortBy="#{user.pontuacao}">
+                <h:outputText value="#{user.pontuacao}" />
+            </p:column>
+            
+            <p:column headerText="">
+                <p:commandButton value="Editar" action="#{NovoUsuario.preparaAlterar(prop)}" onclick="PF('editarDialog').show()" update=":formAltera"/>
+            </p:column>
+            
+	</p:dataTable>
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+          <p:outputPanel style="width: 100%; text-align:center" layout="block"> 
+            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" />
+            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" />
+          </p:outputPanel>
+        </p:confirmDialog>
+    </h:form>
+        
+        
+        
+        
+        
         <h:form>
             <p:menu>
                 <p:submenu label="Quanto é um mais um?">

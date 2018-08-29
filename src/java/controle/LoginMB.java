@@ -1,6 +1,6 @@
 package controle;
 
-import dao.NovoUsuarioDao;
+import dao.UsuarioDao;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -10,21 +10,19 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import modelo.Usuario;
 
-/**
- * Controlador para página de index
- * @author José
- */
+// @author Gabriel Valeze
+
 @ManagedBean (name="login")
 @ViewScoped
-public class Login implements Serializable{
+public class LoginMB implements Serializable{
     private Usuario usuario;
     
-    public Login(){
+    public LoginMB(){
         usuario = new Usuario();
     }
     
     public String autenticar(){
-        NovoUsuarioDao user = new NovoUsuarioDao();
+        UsuarioDao user = new UsuarioDao();
         Usuario temp;
         temp = user.autenticar(usuario);
         if (temp == null){  // se houver erro, método autenticar no dao retorna null
